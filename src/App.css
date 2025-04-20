@@ -1,0 +1,297 @@
+:root {
+  /* --bg: #f4f4f4; */
+  --fg: #2c3e50;
+  --accent: #3498db;
+  --danger: #e74c3c;
+  --card: rgba(255, 255, 255, 0.8);
+}
+
+/* Global styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg); /* Default background */
+  color: var(--fg);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  overflow-y: auto; /* Prevents page from scrolling */
+  transition: 0.4s;
+  position: relative;
+}
+
+/* Dark mode styles */
+body.dark {
+  --bg: #2c3e50;
+  --fg: #ecf0f1;
+  --accent: #2980b9;
+  --danger: #c0392b;
+  --card: rgba(255, 255, 255, 0.1);
+  background: var(--bg);
+}
+
+/* Container for the content */
+.container {
+  max-width: 100%;
+  width: 100%;
+  max-width: 500px;
+  background: var(--card);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  position: relative;
+  margin-top: 20px;
+}
+
+/* Make sure the container fills the viewport height */
+.container {
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  background: var(--card);
+}
+
+/* Adding background image that will cover the entire screen */
+body.dark::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg);
+  z-index: -1; /* Ensures the content appears above */
+}
+
+/* Making the theme toggle consistent in dark mode */
+.theme-toggle label {
+  color: var(--fg);
+  font-size: 18px;
+  padding: 10px;
+}
+
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  text-align: center;
+}
+
+.password-form input,
+.password-controls input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--fg);
+  outline: none;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: gray;
+}
+
+.password-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--accent);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.password-form button:hover {
+  background-color: #1f6690;
+  transform: scale(1.03);
+}
+
+.strength {
+  text-align: left;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.password-list {
+  width: 100%;
+  max-height: 400px; /* Limit height */
+  overflow-y: auto; /* Enable scrolling when content exceeds max height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.password-list ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.password-list li {
+  background: var(--card);
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+  max-width: 450px; /* Set a max width to keep it from being too wide */
+  font-size: 16px;
+}
+
+li span.password {
+  font-weight: bold;
+  color: #f1c40f;
+}
+
+li .actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.copy-btn {
+  background: var(--accent);
+  color: #fff;
+}
+
+.show-btn {
+  background: #9b59b6;
+  color: #fff;
+}
+
+.delete-btn {
+  background: var(--danger);
+  color: white;
+}
+
+.actions button:hover {
+  transform: scale(1.05);
+}
+
+.theme-toggle {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  display: none;
+  z-index: 100;
+}
+.warning-message {
+  color: #27ae60; /* green for success */
+}
+.warning-message.error {
+  color: var(--danger); /* red for errors */
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .container {
+      width: 90%;
+      padding: 20px;
+  }
+
+  h1 {
+      font-size: 24px;
+  }
+
+  .password-form input,
+  .password-controls input {
+      font-size: 14px;
+  }
+
+  .password-form button {
+      padding: 10px;
+      font-size: 14px;
+  }
+
+  .password-list li {
+      padding: 15px;
+  }
+
+  .actions button {
+      font-size: 12px;
+      padding: 5px 8px;
+  }
+
+  .theme-toggle {
+      margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+      width: 95%;
+      padding: 15px;
+  }
+
+  h1 {
+      font-size: 20px;
+  }
+
+  .password-form input,
+  .password-controls input {
+      font-size: 12px;
+  }
+
+  .password-form button {
+      font-size: 12px;
+  }
+
+  .password-list li {
+      padding: 12px;
+  }
+
+  .actions button {
+      font-size: 11px;
+      padding: 4px 7px;
+  }
+
+  #toast {
+      bottom: 10px;
+  }
+}
