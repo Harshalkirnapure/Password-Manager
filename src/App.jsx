@@ -58,8 +58,8 @@ function App() {
     setTimeout(() => setMessage(""), 3000);
   };
 
-  const deletePassword = (index) => {
-    const newPasswords = passwords.filter((_, i) => i !== index);
+  const deletePassword = (selectedEntry) => {
+    const newPasswords = passwords.filter((entry) => entry !== selectedEntry);
     setPasswords(newPasswords);
   };
 
@@ -79,6 +79,12 @@ function App() {
   const toggleTheme = () => {
     setDarkMode((prev) => !prev);
   };
+  const copyPassword = (password) => {
+    navigator.clipboard.writeText(password);
+    setMessage("📋 Password copied!");
+    setTimeout(() => setMessage(""), 2000);
+  };
+  
 
   return (
     <div className={`App`}>
@@ -148,15 +154,15 @@ function App() {
                     {entry.visible ? entry.password : "*".repeat(entry.password.length)}
                   </span>
                   <div className="actions">
-                    <button className="copy-btn">Copy</button>
+                    <button className="copy-btn" onClick={()=> copyPassword(entry.password)}>Copy</button>
                     <button
-  className="show-btn"
-  onClick={() => togglePasswordVisibility(entry)}
->
-  Show
-</button>
-                    <button className="delete-btn" onClick={() => deletePassword(index)}>
-                      Delete
+                      className="show-btn"
+                       onClick={() => togglePasswordVisibility(entry)}
+                     >
+                      Show
+                    </button>
+                    <button className="delete-btn" onClick={() => deletePassword(entry)}>
+                          Delete
                     </button>
                   </div>
                 </li>
