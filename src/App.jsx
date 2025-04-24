@@ -48,7 +48,7 @@ function App() {
       setTimeout(() => setMessage(""), 3000);
       return;
     }
-    const newEntry = { website, username, password };
+    const newEntry = { website, username, password , visible: false};
     setPasswords([...passwords, newEntry]);
     setWebsite("");
     setUsername("");
@@ -63,10 +63,13 @@ function App() {
     setPasswords(newPasswords);
   };
 
-  const togglePasswordVisibility = (index) => {
-    const newPasswords = [...passwords];
-    newPasswords[index].visible = !newPasswords[index].visible;
-    setPasswords(newPasswords);
+  const togglePasswordVisibility = (selectedEntry) => {
+    const updatedPasswords = passwords.map((entry) =>
+      entry === selectedEntry
+        ? { ...entry, visible: !entry.visible }
+        : entry
+    );
+    setPasswords(updatedPasswords);
   };
 
   const handleSearch = (event) => {
@@ -147,11 +150,11 @@ function App() {
                   <div className="actions">
                     <button className="copy-btn">Copy</button>
                     <button
-                      className="show-btn"
-                      onClick={() => togglePasswordVisibility(index)}
-                    >
-                      Show
-                    </button>
+  className="show-btn"
+  onClick={() => togglePasswordVisibility(entry)}
+>
+  Show
+</button>
                     <button className="delete-btn" onClick={() => deletePassword(index)}>
                       Delete
                     </button>
